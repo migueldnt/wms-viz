@@ -1,0 +1,77 @@
+{
+    "settings": {
+        "zoom": 10,
+        "center": [
+            -99.133209,
+            19.432608
+        ]
+    },
+    "skeleton": {
+        "base": [
+            "base_osm"
+        ],
+        "main": [
+            "dem_mexico",
+            "nucleos_agrarios"
+        ]
+    },
+    "layers": [
+        {
+            "type": "tile",
+            "name": "base_osm",
+            "title": "Open Street Map",
+            "visible": true,
+            "settings": {
+                "ol_source_accesor": "OSM"
+            },
+            "plugin_view": {}
+        },
+       
+        
+        {
+            "type": "wms",
+            "name": "dem_mexico",
+            "title": "Modelo digital de elevacion",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "b54",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://gaia.inegi.org.mx/NLB/mdm5.wms",
+                "allow_downloaddata":false
+            },
+            "plugin_view": {}
+        },
+        
+        {
+            "type": "wms",
+            "name": "nucleos_agrarios",
+            "title": "Nucleos Agrarios",
+            "visible": true,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "servicios_sig1:nucleos_agrarios",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://172.16.12.102:8080/geoserver/wms",
+                "extent": [
+                    -118.365119934082,
+                    14.5320978164673,
+                    -86.7104034423828,
+                    32.7186546325684
+                ],
+                "allow_downloaddata":true,
+                "options_downloaddata":{
+                    "from_wfs":true
+                }
+            },
+            "plugin_view": {}
+        }
+        
+    ]
+}

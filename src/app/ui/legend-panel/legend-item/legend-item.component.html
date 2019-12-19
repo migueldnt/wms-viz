@@ -1,0 +1,11 @@
+<p>
+    {{this.legend_item.layer_title}}
+  </p>
+  
+  <img *ngIf="legend_item.use_img" [src]="legend_item.img_url" alt="🌎">
+  <div *ngIf="legend_item.use_singleColorOrLabel">
+    <svg  class="single-color">
+      <rect [ngStyle]="{'fill':legend_item.singleColor}" ></rect>
+    </svg>
+    {{legend_item.singleLabel}}
+  </div>

@@ -1,0 +1,59 @@
+$anchuramapa:80vw;
+$alturamapa:90vh;
+
+.principal-mapa{
+    width: $anchuramapa;
+    height: $alturamapa;
+    cursor: move;
+    position: fixed;
+    
+    top:100 - $alturamapa;
+    left:100 -$anchuramapa;
+}
+
+.principal-panel{
+    position: fixed;
+    top: 100 - $alturamapa;
+    left: 0px;
+    width: 100 -$anchuramapa;
+    height: $alturamapa;
+    background-color: rgb(236, 230, 230);
+    /*padding: 10px 15px;*/
+    z-index: 5;
+    /*box-shadow: rgba(0, 0, 0, 0.62) 4px 0px 16px 0px;*/
+}
+
+.header-panel{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100 - $alturamapa;
+    /*min-height: 64px;*/
+    background-color: #f5f5f5;
+    box-shadow: rgba(0, 0, 0, 0.62) 4px 0px 16px 0px;
+    z-index: 6;
+
+}
+
+
+#legend-panel{
+    position: fixed;
+    top: 102 - $alturamapa;
+    right: 40px;
+    background-color: white;
+    min-width: 10vw;
+    min-height: 5vh;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.62) 7px 8px 14px 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ece6e6;
+    padding: 5px;
+}
+
+#legend-panel .legend-content{
+    max-height: 400px;
+    width: 100%;
+    overflow-y: auto;
+}
