@@ -44,3 +44,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#entorno virtual de python
+
+/create_config_py/venv
+
+.ipynb_checkpoints
