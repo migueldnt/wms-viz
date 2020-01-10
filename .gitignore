@@ -50,3 +50,6 @@ Thumbs.db
 /create_config_py/venv
 
 .ipynb_checkpoints
+
+#el generado en el jupyter notebbok que scrapea geoserver, siempre copiar a map1.json
+copy_and_ignore.json

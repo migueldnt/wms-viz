@@ -11,8 +11,22 @@
             "base_osm"
         ],
         "main": [
-            "dem_mexico",
-            "nucleos_agrarios"
+            {
+                "title": "tiger",
+                "layers": [
+                    "giant_polygon",
+                    "poi",
+                    "poly_landmarks",
+                    "tiger_roads"
+                ]
+            },
+            {
+                "title": "mexico",
+                "layers": [
+                    "centros_mun",
+                    "muns_grado_educacion 2015"
+                ]
+            }
         ]
     },
     "layers": [
@@ -20,58 +34,161 @@
             "type": "tile",
             "name": "base_osm",
             "title": "Open Street Map",
-            "visible": false,
+            "visible": true,
             "settings": {
                 "ol_source_accesor": "OSM"
             },
             "plugin_view": {}
         },
-       
-        
         {
             "type": "wms",
-            "name": "dem_mexico",
-            "title": "Modelo digital de elevacion",
+            "name": "giant_polygon",
+            "title": "World rectangle",
             "visible": false,
             "opacity": 1,
             "settings": {
                 "request_body": {
-                    "LAYERS": "b54",
+                    "LAYERS": "tiger:giant_polygon",
                     "SRS": "EPSG:4326",
                     "TILED": false
                 },
-                "url": "http://gaia.inegi.org.mx/NLB/mdm5.wms",
-                "allow_downloaddata":false
-            },
-            "plugin_view": {}
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
         },
-        
         {
             "type": "wms",
-            "name": "nucleos_agrarios",
-            "title": "Nucleos Agrarios",
-            "visible": true,
+            "name": "poi",
+            "title": "Manhattan (NY) points of interest",
+            "visible": false,
             "opacity": 1,
             "settings": {
                 "request_body": {
-                    "LAYERS": "servicios_sig1:nucleos_agrarios",
+                    "LAYERS": "tiger:poi",
                     "SRS": "EPSG:4326",
                     "TILED": false
                 },
-                "url": "http://172.16.12.102:8080/geoserver/wms",
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -74.0118315772888,
+                    40.70754683896324,
+                    -74.00857344353275,
+                    40.711945649065406
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "poly_landmarks",
+            "title": "Manhattan (NY) landmarks",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "tiger:poly_landmarks",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -74.047185,
+                    40.679648,
+                    -73.90782,
+                    40.882078
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "tiger_roads",
+            "title": "Manhattan (NY) roads",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "tiger:tiger_roads",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -74.02722,
+                    40.684221,
+                    -73.907005,
+                    40.878178
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "centros_mun",
+            "title": "centros_mun",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "mexico:centros_mun",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -112.667640686035,
+                    14.5583333969116,
+                    -86.7807388305664,
+                    30.9304027557373
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "muns_grado_educacion 2015",
+            "title": "muns_grado_educacion 2015",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "mexico:muns_grado_educacion 2015",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
                 "extent": [
                     -118.365119934082,
                     14.5320978164673,
                     -86.7104034423828,
                     32.7186546325684
                 ],
-                "allow_downloaddata":true,
-                "options_downloaddata":{
-                    "from_wfs":true
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
                 }
-            },
-            "plugin_view": {}
+            }
         }
-        
     ]
 }
