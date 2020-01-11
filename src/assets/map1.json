@@ -12,7 +12,7 @@
         ],
         "main": [
             {
-                "title": "tiger",
+                "title": "prueba tiger",
                 "layers": [
                     "giant_polygon",
                     "poi",
@@ -21,10 +21,12 @@
                 ]
             },
             {
-                "title": "mexico",
+                "title": "Registro Agrario Nacional",
                 "layers": [
-                    "centros_mun",
-                    "muns_grado_educacion 2015"
+                    "asentamientos_humanos",
+                    "nucleos_agrarios",
+                    "tierras_usocomun",
+                    "zona_parcelas"
                 ]
             }
         ]
@@ -142,22 +144,22 @@
         },
         {
             "type": "wms",
-            "name": "centros_mun",
-            "title": "centros_mun",
+            "name": "asentamientos_humanos",
+            "title": "asentamientos_humanos",
             "visible": false,
             "opacity": 1,
             "settings": {
                 "request_body": {
-                    "LAYERS": "mexico:centros_mun",
+                    "LAYERS": "servicios_sig1:asentamientos_humanos",
                     "SRS": "EPSG:4326",
                     "TILED": false
                 },
                 "url": "http://localhost:8080/geoserver/wms",
                 "extent": [
-                    -112.667640686035,
-                    14.5583333969116,
-                    -86.7807388305664,
-                    30.9304027557373
+                    -117.084434509277,
+                    14.5518894195557,
+                    -86.835205078125,
+                    32.6848831176758
                 ],
                 "allow_downloaddata": true,
                 "options_downloaddata": {
@@ -167,22 +169,72 @@
         },
         {
             "type": "wms",
-            "name": "muns_grado_educacion 2015",
-            "title": "muns_grado_educacion 2015",
+            "name": "nucleos_agrarios",
+            "title": "Nucleos Agrarios",
             "visible": false,
             "opacity": 1,
             "settings": {
                 "request_body": {
-                    "LAYERS": "mexico:muns_grado_educacion 2015",
+                    "LAYERS": "servicios_sig1:nucleos_agrarios",
                     "SRS": "EPSG:4326",
                     "TILED": false
                 },
                 "url": "http://localhost:8080/geoserver/wms",
                 "extent": [
-                    -118.365119934082,
-                    14.5320978164673,
-                    -86.7104034423828,
-                    32.7186546325684
+                    -117.090538024902,
+                    14.536021232605,
+                    -86.8260879516602,
+                    32.7167778015137
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "tierras_usocomun",
+            "title": "Tierras Uso Comun",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "servicios_sig1:tierras_usocomun",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -117.090538024902,
+                    14.5385818481445,
+                    -86.8276062011719,
+                    32.7167739868164
+                ],
+                "allow_downloaddata": true,
+                "options_downloaddata": {
+                    "from_wfs": true
+                }
+            }
+        },
+        {
+            "type": "wms",
+            "name": "zona_parcelas",
+            "title": "zona_parcelas",
+            "visible": false,
+            "opacity": 1,
+            "settings": {
+                "request_body": {
+                    "LAYERS": "servicios_sig1:zona_parcelas",
+                    "SRS": "EPSG:4326",
+                    "TILED": false
+                },
+                "url": "http://localhost:8080/geoserver/wms",
+                "extent": [
+                    -117.087203979492,
+                    14.536021232605,
+                    -86.8264770507812,
+                    32.7140426635742
                 ],
                 "allow_downloaddata": true,
                 "options_downloaddata": {
