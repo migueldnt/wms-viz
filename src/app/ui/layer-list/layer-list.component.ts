@@ -264,4 +264,8 @@ export class LayerListComponent implements OnInit {
     console.log(this.json1)    
   }
 
+  contextMenu1(){
+    alert("wewe")
+    return false
+  }
 }
