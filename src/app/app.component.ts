@@ -19,6 +19,8 @@ export class AppComponent implements AfterViewInit  {
   mapCreator: DntLayerCreator;
   legends:LegendItem[]=[];
   eljson1:DntLayer[] = [];
+
+  modeClickInfo:boolean=false;
   
   constructor(public simpleRequestService:SimpleRequestService,private _layerRefreshService:LayerRefreshService){
 
@@ -44,5 +46,8 @@ export class AppComponent implements AfterViewInit  {
       });
   }
   
+  toogleModeClickInfo(){
+    this.modeClickInfo=!this.modeClickInfo
+  }
 
 }

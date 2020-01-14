@@ -8,13 +8,16 @@
 
 <!--el panel de arriba que sirve de encabezado-->
 <div id="panel2" class="header-panel">
-    <div class="to-logos"></div>
-    
+    <div class="to-logos">
+        <img src="assets/images/conacyt1.png" alt="">
+    </div>
+    <div class="to-logos title">
+        <p class="title-header"> Nodo de Colaboracion Geoespacial</p>
+    </div>
+    <app-toolbar class="toolbar" [olMapa]="this.mapa" [layerListComp]="ellayerlist" ></app-toolbar>
 </div>
 
 <!--legend popup-->
 <div id="legend-panel">
-    <div class="legend-content">        
-        
-    </div>
+    <app-legend-panel class="legend-content" [legends]="legends"></app-legend-panel>
 </div>

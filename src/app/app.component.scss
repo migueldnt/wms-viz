@@ -4,7 +4,7 @@ $alturamapa:90vh;
 .principal-mapa{
     width: $anchuramapa;
     height: $alturamapa;
-    cursor: move;
+    /*cursor: move; */
     position: fixed;
     
     top:100 - $alturamapa;
@@ -30,10 +30,10 @@ $alturamapa:90vh;
     width: 100%;
     height: 100 - $alturamapa;
     /*min-height: 64px;*/
-    background-color: #f5f5f5;
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.62) 4px 0px 16px 0px;
     z-index: 6;
-
+    display: flex;
 }
 
 
@@ -56,4 +56,30 @@ $alturamapa:90vh;
     max-height: 400px;
     width: 100%;
     overflow-y: auto;
+}
+
+
+
+.to-logos{
+    /* display: inline; */
+    position: sticky;
+    img{
+        height: 99-$alturamapa;
+    }
+    .title-header{
+        font-weight: 600;
+        font-size: 28px;
+        display: inline;
+    }
+}
+
+.toolbar{
+    /* display: inline;*/
+    position: sticky;
+    padding-top: 14px;
+}
+.to-logos.title{
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 50px;
 }

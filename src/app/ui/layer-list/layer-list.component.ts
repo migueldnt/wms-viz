@@ -34,6 +34,7 @@ interface LayerFlatNode {
   templateUrl: './layer-list.component.html',
   styleUrls: ['./layer-list.component.scss']
 })
+
 export class LayerListComponent implements OnInit {
   @Input() json1:DntLayer[]=[]
   
@@ -239,8 +240,10 @@ export class LayerListComponent implements OnInit {
       if (this.oldSobresaliente !=undefined){
         this._renderer.removeClass(this.oldSobresaliente.nativeElement,"dnt-selected-node")
       }
-      let elemsRef:any[]=event.path
-      let nodoHtml:ElementRef=new ElementRef( elemsRef[1])
+      console.log(event);
+      
+      //let elemsRef:any[]=event.path
+      let nodoHtml:ElementRef=new ElementRef( event.target.parentNode)
       this._renderer.addClass(nodoHtml.nativeElement,"dnt-selected-node")
       //console.log(nodoHtml);
       this.oldSobresaliente=nodoHtml;

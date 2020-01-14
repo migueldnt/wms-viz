@@ -1,0 +1,7 @@
+<h1 mat-dialog-title *ngIf="showTitulo"> {{data.titulo}}</h1>
+<div mat-dialog-content class="content">
+  <p>{{data.mensaje}}</p>
+</div>
+<div mat-dialog-actions *ngIf="showBoton">
+  <button mat-button (click)="onNoClick()">Enterado</button>
+</div>

@@ -16,6 +16,9 @@ import { MatTreeModule } from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatButtonModule, MatCheckboxModule, MatDialog, MatDialogModule, MatFormFieldModule, MatSelectModule, MatToolbarModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { DialogDownloadComponent } from './ui/toolbar/dialog-download/dialog-download.component';
+import { DntAlertaComponent } from './ui/dnt-alerta/dnt-alerta.component';
+import { DialogDataInfoComponent } from './ui/toolbar/dialog-data-info/dialog-data-info.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { FormsModule } from '@angular/forms';
     LegendPanelComponent,
     LegendItemComponent,
     ToolbarComponent,
-    MapaComponent
+    MapaComponent,
+    DialogDownloadComponent,
+    DntAlertaComponent,
+    DialogDataInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule
   ],
   providers: [SimpleRequestService,LayerRefreshService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[DialogDownloadComponent,DntAlertaComponent]
 })
 export class AppModule { }

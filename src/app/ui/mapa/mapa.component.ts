@@ -7,9 +7,9 @@ import { Map, View } from 'ol';
   styleUrls: ['./mapa.component.scss']
 })
 export class MapaComponent implements AfterViewInit {
-  public olMapa:Map=null;
+  public olMapa?:Map=null;
   @ViewChild("divMapOl",{static:false}) mapTarget:ElementRef
-  constructor() { 
+  constructor(private _renderer:Renderer2) { 
     
   }
 
@@ -26,5 +26,10 @@ export class MapaComponent implements AfterViewInit {
 
   public onload_OlMapa=(mapa:Map)=>{}
 
+  setCursorMap(type:string){
+    //this._renderer.se
+  }
+
 
 }
+

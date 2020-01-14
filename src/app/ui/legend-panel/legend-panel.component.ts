@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { LegendItem } from './legend-item';
+import { DntLayerCreator } from "../../abstract/dnt-layer-creator"
 
 @Component({
   selector: 'app-legend-panel',
@@ -9,7 +11,11 @@ export class LegendPanelComponent implements OnInit {
 
   constructor() { }
 
+  
+  @Input() legends:LegendItem[]=[];
+
   ngOnInit() {
+
   }
 
 }

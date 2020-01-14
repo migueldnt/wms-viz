@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+    <p class="cotent-font">Descargar capa <b>{{layer.title}}</b></p>
+    <mat-form-field>
+      <mat-label>Selecciona una descarga disponible</mat-label>
+      <mat-select [(ngModel)]="descarga_seleccionada">
+        <mat-option *ngFor="let descarga of descargas_disponibles" [value]="descarga">
+          {{descarga.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <div>
+      <p>{{descarga_seleccionada.title}}</p>
+      <p>{{descarga_seleccionada.description}}</p>
+      <p><a [download]="'archivo.'+descarga_seleccionada.extension" [href]="descarga_seleccionada.formed_url"  target="_blank">Descarga aquí</a></p>
+      <img *ngIf="descarga_seleccionada.previzualiza!=undefined && descarga_seleccionada.previzualiza==true" 
+      [src]="descarga_seleccionada.url_prev||'https://via.placeholder.com/250'" alt="previsualizacion descarga">
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Gracias</button>
+  </div>
