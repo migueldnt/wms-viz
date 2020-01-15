@@ -1,11 +1,14 @@
-import { Component, OnInit, Input, ViewChildren, ElementRef ,Renderer2} from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, ElementRef ,Renderer2, ViewChild, TemplateRef, ViewContainerRef} from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeNode} from '@angular/material/tree';
 import { LayerRefreshService } from '../../services/layer-refresh.service';
 import { DntLayer } from '../../abstract/DntLayer/dnt-layer';
 import { GroupDntL } from '../../abstract/DntLayer/group-dnt-l';
-
+import { OverlayRef, Overlay } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Subscription, fromEvent } from 'rxjs';
+import { take, filter } from 'rxjs/operators';
 
 
 /**
@@ -37,6 +40,7 @@ interface LayerFlatNode {
 
 export class LayerListComponent implements OnInit {
   @Input() json1:DntLayer[]=[]
+  
   
   //@ViewChildren(MatTreeNode,{read:ElementRef}) treeNodes:ElementRef[];
   oldSobresaliente:ElementRef;
@@ -77,7 +81,15 @@ export class LayerListComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<LayerFlatNode>(true /* multiple */);
 
-  constructor(private _layerRefreshService:LayerRefreshService,private _renderer:Renderer2) {
+  /**
+   * Constructor
+   * @param _layerRefreshService 
+   * @param _renderer 
+   */
+  constructor(private _layerRefreshService:LayerRefreshService,private _renderer:Renderer2,
+    public overlay: Overlay,
+    public viewContainerRef: ViewContainerRef
+    ) {
     this.dataSource.data = TREE_DATA
     this._layerRefreshService.listen().subscribe((m:any)=>{
       console.log(m)
@@ -236,6 +248,7 @@ export class LayerListComponent implements OnInit {
     }
 
     select_node(node:LayerFlatNode,event:any){
+      this.closeContextualMenu()
       //quitar la seleccion de los demas elementos
       if (this.oldSobresaliente !=undefined){
         this._renderer.removeClass(this.oldSobresaliente.nativeElement,"dnt-selected-node")
@@ -264,8 +277,64 @@ export class LayerListComponent implements OnInit {
     console.log(this.json1)    
   }
 
-  contextMenu1(){
-    alert("wewe")
+
+  @ViewChild("layerMenu",{static:false}) layerMenu:TemplateRef<any>;
+
+  overlayRef: OverlayRef | null;
+  sub:Subscription
+
+  /**
+   *  funcion que se lanza cuando dan click derecho en una capa
+   * @param event 
+   * @param node 
+   */
+  contextMenu1(eventt:MouseEvent,node:LayerFlatNode){
+    this.closeContextualMenu()
+    let x=eventt.x;
+    let y=eventt.y;
+    //alert(node.dntLayer.title);
+    const positionStrategy=this.overlay.position()
+      .flexibleConnectedTo({x,y})
+      .withPositions([
+        {
+          originX:"end",
+          originY:"bottom",
+          overlayX:"start",
+          overlayY:"top"
+        }
+      ])
+      this.overlayRef=this.overlay.create({
+        positionStrategy,
+        scrollStrategy:this.overlay.scrollStrategies.close()
+      })
+
+      this.overlayRef.attach(new TemplatePortal(this.layerMenu,this.viewContainerRef,{ $implicit:node }) )
+
+      this.sub=fromEvent<MouseEvent>(document,"click")
+        .pipe(
+          filter(event=>{
+            const clickTarget=event.target as HTMLElement;
+            return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
+          }),
+          take(1)
+        ).subscribe( ()=>this.closeContextualMenu() )
     return false
   }
+
+  /**
+   * Cierra el menu contextual de los layers
+   */
+  closeContextualMenu(){
+    this.sub && this.sub.unsubscribe();
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
+  }
+
+  getMetadataLayer(node:LayerFlatNode){
+    this.closeContextualMenu()
+    alert("mostrar los metadatos de este layer")
+  }
+
 }

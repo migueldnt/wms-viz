@@ -5,7 +5,7 @@
       <mat-checkbox class="checklist-leaf-node"
                     [checked]="_checklistSelection_isSelected(node)"
                     (change)="todoLeafItemSelectionToggle(node)"></mat-checkbox>&nbsp;
-      <span class="text-to-click" title="click para seleccionar" (click)="select_node(node,$event)" (contextmenu)="contextMenu1()" >{{node.name}}</span>
+      <span class="text-to-click" title="click para seleccionar" (click)="select_node(node,$event)" (contextmenu)="contextMenu1($event,node)" >{{node.name}}</span>
     </mat-tree-node>
   
     <!-- This is the tree node template for expandable nodes -->
@@ -27,3 +27,11 @@
   <!--
   <button (click)="mensaje1()">click1</button>
   -->
+
+<ng-template #layerMenu let-node>
+  <section class="contextualLayerMenu">
+    <div (click)="getMetadataLayer(node)" >Obtener metadatos</div>
+    <div (click)="alert('aun falta programarlo')">Zoom to layer</div>
+    <div>Descargar</div>
+  </section>
+</ng-template>

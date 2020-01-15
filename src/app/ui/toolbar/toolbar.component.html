@@ -7,8 +7,10 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon">cloud_download</mat-icon>
     </button>
 
-    <button mat-button (click)="info_button()" [title]=" (this.layerListComp.currentDntLayer!=undefined)? 'Info  '+this.layerListComp.currentDntLayer.title: 'Informacion de capa' ">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">info</mat-icon>
+    <button mat-button (click)="info_button()" 
+    [title]=" (this.layerListComp.currentDntLayer!=undefined)? 'Info  '+this.layerListComp.currentDntLayer.title: 'Informacion de capa' "
+    class="active">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">{{this.appComponent.getModeClickInfo()?'info':'info_outline'}}</mat-icon>
     </button>
     
     </mat-toolbar>

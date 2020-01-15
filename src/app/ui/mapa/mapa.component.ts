@@ -26,8 +26,19 @@ export class MapaComponent implements AfterViewInit {
 
   public onload_OlMapa=(mapa:Map)=>{}
 
-  setCursorMap(type:string){
-    //this._renderer.se
+  setCursorMap(type:"cursor-default" | "cursor-help"){
+    console.log(this.mapTarget);
+    
+    //this._renderer.removeClass(this.mapTarget,"cursor-move");
+    //
+    if(type=="cursor-default"){
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-help");
+    }
+    if(type=="cursor-help"){
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-default");
+    }
+    this._renderer.addClass(this.mapTarget.nativeElement,type);
+    
   }
 
 

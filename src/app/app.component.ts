@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit  {
   legends:LegendItem[]=[];
   eljson1:DntLayer[] = [];
 
-  modeClickInfo:boolean=false;
+  private modeClickInfo:boolean=false;
   
   constructor(public simpleRequestService:SimpleRequestService,private _layerRefreshService:LayerRefreshService){
 
@@ -48,6 +48,15 @@ export class AppComponent implements AfterViewInit  {
   
   toogleModeClickInfo(){
     this.modeClickInfo=!this.modeClickInfo
+    if(this.modeClickInfo){
+      this.mapComponent.setCursorMap("cursor-help")
+    }else{
+      this.mapComponent.setCursorMap("cursor-default")
+    }
+  }
+
+  getModeClickInfo():boolean{
+    return this.modeClickInfo;
   }
 
 }
