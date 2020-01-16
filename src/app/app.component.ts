@@ -6,6 +6,8 @@ import { DntLayerCreator } from "./abstract/dnt-layer-creator"
 import { LegendItem } from './ui/legend-panel/legend-item';
 import { LayerRefreshService } from './services/layer-refresh.service';
 import { DntLayer } from './abstract/DntLayer/dnt-layer';
+import { ToolbarComponent } from './ui/toolbar/toolbar.component';
+import { LayerListComponent } from './ui/layer-list/layer-list.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,8 @@ import { DntLayer } from './abstract/DntLayer/dnt-layer';
 export class AppComponent implements AfterViewInit  {
   title = 'wms-viz';
   @ViewChild(MapaComponent,{static:false}) mapComponent:MapaComponent
+  //@ViewChild(ToolbarComponent,{static:false}) toolbarComponent:MapaComponent
+  @ViewChild(LayerListComponent,{static:false}) layerListComponent:LayerListComponent
   mapa:Map=null;
   mapCreator: DntLayerCreator;
   legends:LegendItem[]=[];
@@ -32,7 +36,6 @@ export class AppComponent implements AfterViewInit  {
   }
 
   ngAfterViewInit(){
-    
       this.mapa=this.mapComponent.olMapa;
       //console.log(this)
       this.simpleRequestService.getJson("assets/map1.json").subscribe( (data)=>{

@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Directive, ViewChildren, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Map, View } from 'ol';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'dnt-mapa',
@@ -9,8 +10,8 @@ import { Map, View } from 'ol';
 export class MapaComponent implements AfterViewInit {
   public olMapa?:Map=null;
   @ViewChild("divMapOl",{static:false}) mapTarget:ElementRef
-  constructor(private _renderer:Renderer2) { 
-    
+  constructor(private _renderer:Renderer2, public mainAppComponent:AppComponent) { 
+
   }
 
   ngAfterViewInit() {
@@ -22,6 +23,14 @@ export class MapaComponent implements AfterViewInit {
       })
     });
     this.onload_OlMapa(this.olMapa)
+    this.olMapa.on("singleclick",(ev:any)=>{
+      if(this.mainAppComponent.getModeClickInfo()){
+        let lay=this.mainAppComponent.layerListComponent.currentDntLayer.title
+        console.log(lay);
+        
+      }
+      
+    })
   }
 
   public onload_OlMapa=(mapa:Map)=>{}
