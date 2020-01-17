@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, Directive, ViewChildren, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Map, View } from 'ol';
 import { AppComponent } from 'src/app/app.component';
+import { DntLayer } from 'src/app/abstract/DntLayer/dnt-layer';
+import { WMSDntL } from 'src/app/abstract/DntLayer/wmsdnt-l';
 
 @Component({
   selector: 'dnt-mapa',
@@ -25,9 +27,20 @@ export class MapaComponent implements AfterViewInit {
     this.onload_OlMapa(this.olMapa)
     this.olMapa.on("singleclick",(ev:any)=>{
       if(this.mainAppComponent.getModeClickInfo()){
-        let lay=this.mainAppComponent.layerListComponent.currentDntLayer.title
-        console.log(lay);
+        let DNTlay:WMSDntL= <WMSDntL>this.mainAppComponent.layerListComponent.currentDntLayer
+        //console.log(ev.pixel)
+        let url=DNTlay.getFeatureInfo(ev.pixel,this.olMapa.getSize(),this.olMapa.getView().calculateExtent(this.olMapa.getSize()),null)
+        console.log(url);
         
+        /*
+        En la siguiente funcion podria interpretarse que con el rgba se puede saber si esta tocando un feature sabiendo si
+        el rgba es trasnparente o tiene color 
+        this.olMapa.forEachLayerAtPixel(ev.pixel,(layer:any,rgba:any)=>{
+          console.log(layer.get("name")+" en esta vain");
+          console.log(rgba);
+          
+        })
+        */
       }
       
     })

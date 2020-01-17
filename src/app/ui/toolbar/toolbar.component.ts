@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnInit {
   info_button(){
     //this.appComponent.modeClickInfo= ! this.appComponent.modeClickInfo;
     this.appComponent.toogleModeClickInfo();
-    this.appComponent.getModeClickInfo()
+    //this.appComponent.getModeClickInfo()
   }
 
 }

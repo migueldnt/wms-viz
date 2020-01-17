@@ -5,6 +5,7 @@ import TileWMS from 'ol/source/TileWMS';
 import ImageWMS from 'ol/source/ImageWMS';
 import { LegendItem } from "../../ui/legend-panel/legend-item";
 import { Map, ImageTile } from 'ol';
+import * as olPixel from 'ol/pixel'
 
 import ImageLayer from 'ol/layer/Image';
 
@@ -24,7 +25,7 @@ export class WMSDntL extends DntLayer {
                 url: this.settings.url,
                 params: this.settings.request_body,
                 serverType: "geoserver",
-                attributions:"Inegi gaia"
+                attributions:this.settings.attributions || "Conacyt"
                 /*tileLoadFunction:function(imageTile:ImageTile, src) {
                     console.log(imageTile.getTileCoord());
                     (<HTMLImageElement> imageTile.getImage()).src = src;
@@ -48,6 +49,22 @@ export class WMSDntL extends DntLayer {
         let params: string = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + this.settings.request_body.LAYERS;
         leyenda.img_url = this.settings.url + params;
         return leyenda
+    }
+
+    getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function){
+        //quitar los parametros no necesarios, apegarse a a documentacion
+        let params:any={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetFeatureInfo",
+        "FORMAT":"image/png","TRANSPARENT":"true","QUERY_LAYERS":this.settings.request_body.LAYERS,
+        "LAYERS":this.settings.request_body.LAYERS,
+        "exceptions":"application/vnd.ogc.se_inimage",
+        "INFO_FORMAT":"text/html","FEATURE_COUNT":"20","X":pixel[0],"Y":pixel[1],
+        "SRS":"EPSG:4326","STYLES":"","WIDTH":mapsize[0],"HEIGHT":mapsize[1],
+        "BBOX":mapExtent.join(",")}
+        let parms=Object.keys(params).map((k)=>{
+            //console.log(info)
+            return encodeURIComponent(k)+"="+encodeURIComponent(params[k])
+        })
+        return this.settings.url+"?"+parms.join("&")
     }
 
     getOpcionesDescarga(mapa: Map = null): DescargableInfo[] {
@@ -117,7 +134,8 @@ export interface WMSSettingsParam {
     url: string,
     extent?: number[],
     allow_downloaddata?: boolean,//default true
-    options_downloaddata?: WMSOptionsDownloadData //default interpreta wfs
+    options_downloaddata?: WMSOptionsDownloadData, //default interpreta wfs
+    attributions?:string
 }
 
 export interface WMSOptionsDownloadData {
