@@ -51,13 +51,13 @@ export class WMSDntL extends DntLayer {
         return leyenda
     }
 
-    getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function){
+    getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function):string{
         //quitar los parametros no necesarios, apegarse a a documentacion
         let params:any={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetFeatureInfo",
-        "FORMAT":"image/png","TRANSPARENT":"true","QUERY_LAYERS":this.settings.request_body.LAYERS,
+        /*"FORMAT":"image/png", "TRANSPARENT":"true",*/ "QUERY_LAYERS":this.settings.request_body.LAYERS,
         "LAYERS":this.settings.request_body.LAYERS,
         "exceptions":"application/vnd.ogc.se_inimage",
-        "INFO_FORMAT":"text/html","FEATURE_COUNT":"20","X":pixel[0],"Y":pixel[1],
+        "INFO_FORMAT":"application/json","FEATURE_COUNT":"20","X":Math.round( pixel[0] ),"Y": Math.round( pixel[1] ),
         "SRS":"EPSG:4326","STYLES":"","WIDTH":mapsize[0],"HEIGHT":mapsize[1],
         "BBOX":mapExtent.join(",")}
         let parms=Object.keys(params).map((k)=>{
