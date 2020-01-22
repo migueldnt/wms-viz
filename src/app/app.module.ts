@@ -20,6 +20,8 @@ import { DialogDownloadComponent } from './ui/toolbar/dialog-download/dialog-dow
 import { DntAlertaComponent } from './ui/dnt-alerta/dnt-alerta.component';
 import { DialogDataInfoComponent } from './ui/toolbar/dialog-data-info/dialog-data-info.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,8 @@ import { DialogDataInfoComponent } from './ui/toolbar/dialog-data-info/dialog-da
     BrowserAnimationsModule,
     HttpClientModule,
     MatTreeModule,MatIconModule,MatButtonModule,
-    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule
+    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule,
+    NgbModule
   ],
   providers: [SimpleRequestService,LayerRefreshService],
   bootstrap: [AppComponent],

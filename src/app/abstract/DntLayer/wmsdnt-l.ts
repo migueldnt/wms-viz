@@ -51,10 +51,12 @@ export class WMSDntL extends DntLayer {
         return leyenda
     }
 
-    getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function):string{
+    getFeatureInfo(coordinate:number[],resolution:any,callback:Function):string{
+    //getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function):string{
         //quitar los parametros no necesarios, apegarse a a documentacion
-        let params:any={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetFeatureInfo",
-        /*"FORMAT":"image/png", "TRANSPARENT":"true",*/ "QUERY_LAYERS":this.settings.request_body.LAYERS,
+        
+        /*let params:any={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetFeatureInfo",
+        "QUERY_LAYERS":this.settings.request_body.LAYERS,
         "LAYERS":this.settings.request_body.LAYERS,
         "exceptions":"application/vnd.ogc.se_inimage",
         "INFO_FORMAT":"application/json","FEATURE_COUNT":"20","X":Math.round( pixel[0] ),"Y": Math.round( pixel[1] ),
@@ -64,7 +66,8 @@ export class WMSDntL extends DntLayer {
             //console.log(info)
             return encodeURIComponent(k)+"="+encodeURIComponent(params[k])
         })
-        return this.settings.url+"?"+parms.join("&")
+        return this.settings.url+"?"+parms.join("&") */
+        return (<ImageWMS>this.layer.getSource()).getFeatureInfoUrl(coordinate,resolution,"EPSG:4326",{'INFO_FORMAT': 'application/json'})
     }
 
     getOpcionesDescarga(mapa: Map = null): DescargableInfo[] {
