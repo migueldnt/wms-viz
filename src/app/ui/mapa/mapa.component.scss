@@ -9,16 +9,71 @@
 }
 
 .cursor-help{
-    cursor: url(https://66.media.tumblr.com/23cc2bc23b71f3fddf182a4cfe28d672/301e3e9a76c953c3-8a/s75x75_c1/a0ca7ca14aeafdfba9ed10a851c62934ad95b436.gifv),help;
+    cursor: help;
 }
 
-.map-info-popup{
-    background-color: white;
-    ::before{
-        border-top-color:
-        #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
+.cursor-wait{
+    cursor: wait;
+}
+
+
+
+.dnt-pop{
+    position: absolute;
+    
+    .dnt-pop-tip-container{
+        width: 40px;
+        height: 20px;
+        position: absolute;
+        left: 0%;
+        margin-left: -10px;
+        overflow: hidden;
+        pointer-events: none;
+        top: 0%;
+
+        
+        
+
+        
     }
+}
+
+.dnt-pop-tip , .dnt-pop-content{
+    background:#fff;
+    color:#333;
+    box-shadow: 13px 11px 11px rgba(0, 0, 0, 0.4);
+
+}
+
+.dnt-pop-content{
+    margin-left: 10px;
+    background-color:#fff;
+    
+    position: absolute;
+    
+    padding: 1px;
+    text-align: left;
+    
+
+    .dnt-pop-inner{
+        width: 250px;
+        height: 250px;
+        padding: 0;
+        margin: 0 0 0 10px;
+        overflow-y: auto;
+    }
+}
+
+
+.dnt-pop-tip{
+            
+    width: 17px;
+    height: 17px;
+    padding: 1px;
+    margin: -10px auto 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

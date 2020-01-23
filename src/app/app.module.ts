@@ -22,6 +22,7 @@ import { DialogDataInfoComponent } from './ui/toolbar/dialog-data-info/dialog-da
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,8 +40,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     MatTreeModule,MatIconModule,MatButtonModule,
-    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule,
-    NgbModule
+    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule
   ],
   providers: [SimpleRequestService,LayerRefreshService],
   bootstrap: [AppComponent],

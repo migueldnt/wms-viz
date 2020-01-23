@@ -55,9 +55,14 @@ export class MapaComponent implements AfterViewInit {
         let DNTlay:WMSDntL= <WMSDntL>this.mainAppComponent.layerListComponent.currentDntLayer
         //console.log(ev.pixel)
         //let url=DNTlay.getFeatureInfo(ev.pixel,this.olMapa.getSize(),this.olMapa.getView().calculateExtent(this.olMapa.getSize()),null)
-        let url=DNTlay.getFeatureInfo(ev.coordinate,this.olMapa.getView().getResolution(),null)
-        console.log(url);
-        this.openPopup(ev,[]);
+        let url=DNTlay.getFeatureInfo(ev.coordinate,this.olMapa.getView().getResolution())
+        this.setCursorMap("cursor-wait");
+        this.mainAppComponent.simpleRequestService.getJson(url).subscribe( (data)=>{
+          console.log(data);
+          this.setCursorMap("cursor-help");
+          this.openPopup(ev,[]);  
+        } )
+        
         /*
         En la siguiente funcion podria interpretarse que con el rgba se puede saber si esta tocando un feature sabiendo si
         el rgba es trasnparente o tiene color 
@@ -70,31 +75,42 @@ export class MapaComponent implements AfterViewInit {
       }
       
     })
+
+    this.olMapa.on("moveend",(ev)=>{
+      this.closePopup()
+    })
   }
 
   public onload_OlMapa=(mapa:Map)=>{}
 
-  setCursorMap(type:"cursor-default" | "cursor-help"){
+  setCursorMap(type:"cursor-default" | "cursor-help" | "cursor-wait"){
     console.log(this.mapTarget);
     
     //this._renderer.removeClass(this.mapTarget,"cursor-move");
     //
     if(type=="cursor-default"){
       this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-help");
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-wait");
     }
     if(type=="cursor-help"){
       this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-default");
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-wait");
     }
+    if(type=="cursor-wait"){
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-default");
+      this._renderer.removeClass(this.mapTarget.nativeElement,"cursor-help");
+    }
+
     this._renderer.addClass(this.mapTarget.nativeElement,type);
     
   }
 
 
-  @ViewChild("popover2",{static:false}) popover2:NgbPopover
+  
 
 
   openPopup(ev:any,attrs:any){
-    //this.closePopup()
+    this.closePopup()
     let x=ev.originalEvent.x;
     let y=ev.originalEvent.y
     const positionStrategy=this.overlay.position()
@@ -111,7 +127,7 @@ export class MapaComponent implements AfterViewInit {
       positionStrategy,scrollStrategy:this.overlay.scrollStrategies.close()
     })
     this.overlayRef.attach(new TemplatePortal(this.infoPopup,this.viewContainerRef,{$implicit:attrs}))
-    this.popover2.open()
+    
     //quitarlo despues deun click .. o mejor de scroll ya sea aqui o desde los ol events  
     //usando el sub para que se quite el popup
     /*

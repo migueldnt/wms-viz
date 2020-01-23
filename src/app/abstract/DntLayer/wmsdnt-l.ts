@@ -9,6 +9,7 @@ import * as olPixel from 'ol/pixel'
 
 import ImageLayer from 'ol/layer/Image';
 
+
 export class WMSDntL extends DntLayer {
     settings: WMSSettingsParam;
 
@@ -51,7 +52,7 @@ export class WMSDntL extends DntLayer {
         return leyenda
     }
 
-    getFeatureInfo(coordinate:number[],resolution:any,callback:Function):string{
+    getFeatureInfo(coordinate:number[],resolution:any):string{
     //getFeatureInfo(pixel:olPixel,mapsize:number[],mapExtent:number[],callback:Function):string{
         //quitar los parametros no necesarios, apegarse a a documentacion
         
@@ -67,7 +68,9 @@ export class WMSDntL extends DntLayer {
             return encodeURIComponent(k)+"="+encodeURIComponent(params[k])
         })
         return this.settings.url+"?"+parms.join("&") */
-        return (<ImageWMS>this.layer.getSource()).getFeatureInfoUrl(coordinate,resolution,"EPSG:4326",{'INFO_FORMAT': 'application/json'})
+        let url:string=(<ImageWMS>this.layer.getSource()).getFeatureInfoUrl(coordinate,resolution,"EPSG:4326",{'INFO_FORMAT': 'application/json'});
+
+        return url;
     }
 
     getOpcionesDescarga(mapa: Map = null): DescargableInfo[] {
