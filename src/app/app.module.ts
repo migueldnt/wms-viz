@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MatTreeModule } from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon'; 
-import {MatButtonModule, MatCheckboxModule, MatDialog, MatDialogModule, MatFormFieldModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatDialog, MatDialogModule, MatFormFieldModule, MatSelectModule, MatToolbarModule,MatTable, MatTableModule, MatExpansionModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DialogDownloadComponent } from './ui/toolbar/dialog-download/dialog-download.component';
 import { DntAlertaComponent } from './ui/dnt-alerta/dnt-alerta.component';
@@ -40,7 +40,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     MatTreeModule,MatIconModule,MatButtonModule,
-    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule
+    MatCheckboxModule,MatDialogModule,MatFormFieldModule,MatSelectModule,FormsModule, MatToolbarModule,MatTableModule,
+    MatExpansionModule
   ],
   providers: [SimpleRequestService,LayerRefreshService],
   bootstrap: [AppComponent],

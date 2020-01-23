@@ -68,7 +68,8 @@ export class WMSDntL extends DntLayer {
             return encodeURIComponent(k)+"="+encodeURIComponent(params[k])
         })
         return this.settings.url+"?"+parms.join("&") */
-        let url:string=(<ImageWMS>this.layer.getSource()).getFeatureInfoUrl(coordinate,resolution,"EPSG:4326",{'INFO_FORMAT': 'application/json'});
+        let url:string=(<ImageWMS>this.layer.getSource()).getFeatureInfoUrl(coordinate,resolution,"EPSG:4326",
+        {'INFO_FORMAT': 'application/json',"FEATURE_COUNT":"20"});
 
         return url;
     }
