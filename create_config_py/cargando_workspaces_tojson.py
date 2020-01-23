@@ -1,7 +1,9 @@
-geoserver_url="http://localhost:8080/geoserver"
+geoserver_url="http://172.16.12.23:8080/geoserver"
 geoserver_rest=geoserver_url+"/rest"
 #definir los workspaces a utilizar
-workspaces_use0=[("mexico","preubas"),("tiger","tiger NY")]
+workspaces_use0=[("ecologica","Dimensión Ecológica"),("social","Dimensión Social"),
+                 ("politica_y_gobierno","Dimensión Política y de Gobierno"),("fisico","Dimensión Física"),
+                 ("economica","Dimensión Económica")]
 workspaces_use= [w[0] for w in  workspaces_use0]
 workspaces_use
 
